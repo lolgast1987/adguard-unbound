@@ -11,8 +11,6 @@ RUN wget https://www.internic.net/domain/named.root -qO- >> /var/lib/unbound/roo
 
 COPY a-records.conf unbound.conf /opt/unbound/etc/unbound/
 
-###### START ADGUARD INSTALL ######
-
 WORKDIR /opt
 
 RUN wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz >/dev/null 2>&1 \
@@ -28,8 +26,6 @@ RUN /bin/ash ./AdGuardHome \
 WORKDIR /opt/adguardhome/work
 
 VOLUME ["/opt/adguardhome/conf", "/opt/adguardhome/work"]
-
-###### END ADGUARD INSTALL ######
 
 COPY entrypoint.sh /opt/entrypoint.sh
 RUN chmod +x /opt/entrypoint.sh
