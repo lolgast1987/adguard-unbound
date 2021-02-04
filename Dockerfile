@@ -15,13 +15,13 @@ COPY a-records.conf unbound.conf /opt/unbound/etc/unbound/
 
 WORKDIR /opt
 
-RUN wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz \
+RUN wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz >/dev/null 2>&1 \
 	&& tar xf AdGuardHome_linux_amd64.tar.gz AdGuardHome/AdGuardHome
 
 RUN /bin/ash ./AdGuardHome \
 	&& mkdir -p /opt/adguardhome/conf /opt/adguardhome/work \
 	&& chown -R nobody: /opt/adguardhome \
-	&& setcap 'CAP_NET_BIND_SERVICE=+eip CAP_NET_RAW=+eip' /opt/AdGuardHome/AdGuardHome >/dev/null 2>&1 \
+	&& setcap 'CAP_NET_BIND_SERVICE=+eip CAP_NET_RAW=+eip' /opt/AdGuardHome/AdGuardHome \
 	&& rm AdGuardHome_linux_amd64.tar.gz \
 	&& rm -rf /tmp/* /var/cache/apk/* 
 
