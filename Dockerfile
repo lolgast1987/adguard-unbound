@@ -9,7 +9,7 @@ RUN apk add --no-cache \
 RUN mkdir -p /var/lib/unbound
 RUN wget https://www.internic.net/domain/named.root -qO- >> /var/lib/unbound/root.hints
 
-COPY a-records.conf unbound.conf /opt/unbound/etc/unbound/
+COPY files/unbound.conf /opt/unbound/etc/unbound/
 
 WORKDIR /opt
 
@@ -23,12 +23,12 @@ RUN /bin/ash ./AdGuardHome \
 	&& rm AdGuardHome_linux_amd64.tar.gz \
 	&& rm -rf /tmp/* /var/cache/apk/* 
 
+COPY files/entrypoint.sh /opt/entrypoint.sh
+RUN chmod +x /opt/entrypoint.sh
+
 WORKDIR /opt/adguardhome/work
 
-VOLUME ["/opt/adguardhome/conf", "/opt/adguardhome/work"]
-
-COPY entrypoint.sh /opt/entrypoint.sh
-RUN chmod +x /opt/entrypoint.sh
+VOLUME ["/opt/adguardhome/conf", "/opt/adguardhome/work", "/opt/unbound/etc/unbound"]
 
 EXPOSE 53/tcp 53/udp 67/udp 68/udp 80/tcp 443/tcp 853/tcp 3000/tcp 5053/udp 5053/tcp
 
