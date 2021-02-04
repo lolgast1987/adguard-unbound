@@ -30,4 +30,4 @@ EXPOSE 53/tcp 53/udp 67/udp 68/udp 80/tcp 443/tcp 853/tcp 3000/tcp 5053/udp 5053
 CMD ["/opt/entrypoint.sh"]
 
 LABEL \
-    maintainer="lolgast1987 <lolgast@live.nl>" \
+    maintainer="lolgast1987 <lolgast@live.nl>"
