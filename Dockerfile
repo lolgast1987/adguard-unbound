@@ -6,10 +6,9 @@ RUN apk add --no-cache \
 	ca-certificates \
 	unbound
 
-RUN mkdir -p /var/lib/unbound
-RUN wget https://www.internic.net/domain/named.root -qO- >> /var/lib/unbound/root.hints
+RUN wget https://www.internic.net/domain/named.root -qO- >> /etc/unbound/root.hints
 
-COPY files/unbound.conf /opt/unbound/etc/unbound/
+COPY files/unbound.conf /opt/unbound/unbound.conf
 
 WORKDIR /opt
 
@@ -28,7 +27,7 @@ RUN chmod +x /opt/entrypoint.sh
 
 WORKDIR /opt/adguardhome/work
 
-VOLUME ["/opt/adguardhome/conf", "/opt/adguardhome/work", "/opt/unbound/etc/unbound"]
+VOLUME ["/opt/adguardhome/conf", "/opt/adguardhome/work", "/opt/unbound"]
 
 EXPOSE 53/tcp 53/udp 67/udp 68/udp 80/tcp 443/tcp 853/tcp 3000/tcp 5053/udp 5053/tcp
 
