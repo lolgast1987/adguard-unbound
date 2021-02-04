@@ -1,6 +1,6 @@
 #!/bin/ash
 
-unbound -c /opt/unbound/etc/unbound/unbound.conf
+unbound -c /opt/unbound/unbound.conf
 status=$?
 if [ $status -ne 0 ]; then
   echo "Failed to start unbound: $status"
