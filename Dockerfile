@@ -1,7 +1,7 @@
-FROM alpine
+FROM alpine:3.13.1
  
 RUN apk add --no-cache \
-	unbound=1.13.0-r3
+	unbound=1.13.1-r0
 
 WORKDIR /tmp
 
@@ -11,10 +11,10 @@ COPY files/ /opt/
 
 RUN chmod +x /opt/entrypoint.sh
 
+# AdGuardHome v0.105.0
 RUN wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz >/dev/null 2>&1 \
-	&& tar xf AdGuardHome_linux_amd64.tar.gz ./AdGuardHome/AdGuardHome -C /opt
-
-RUN /bin/ash /opt/AdGuardHome \
+	&& tar xf AdGuardHome_linux_amd64.tar.gz ./AdGuardHome/AdGuardHome -C /opt \
+	&& /bin/ash /opt/AdGuardHome \
 	&& mkdir -p /opt/adguardhome/conf /opt/adguardhome/work \
 	&& chown -R nobody: /opt/adguardhome \
 	&& setcap 'CAP_NET_BIND_SERVICE=+eip CAP_NET_RAW=+eip' /opt/AdGuardHome/AdGuardHome \
