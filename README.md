@@ -11,7 +11,7 @@ As with the original AdGuardHome image, this exposes the following: \
 /opt/adguardhome/work \
 /opt/adguardhome/conf
 
-For Unboud: \
+For Unbound: \
 /opt/unbound (Needs unbound.conf)
 
 **Ports:**
