@@ -10,7 +10,7 @@ RUN wget https://www.internic.net/domain/named.root -qO- >> /etc/unbound/root.hi
 COPY files/unbound.conf /opt/unbound/unbound.conf
 
 RUN wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz >/dev/null 2>&1 \
-	&& tar xf AdGuardHome_linux_amd64.tar.gz AdGuardHome/AdGuardHome -C /opt
+	&& tar xf AdGuardHome_linux_amd64.tar.gz ./AdGuardHome/AdGuardHome -C /opt
 
 RUN /bin/ash /opt/AdGuardHome \
 	&& mkdir -p /opt/adguardhome/conf /opt/adguardhome/work \
