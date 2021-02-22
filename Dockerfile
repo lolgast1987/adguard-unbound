@@ -11,7 +11,7 @@ COPY files/ /opt/
 
 RUN chmod +x /opt/entrypoint.sh
 
-# AdGuardHome v0.105.0
+# AdGuardHome v0.105.1
 RUN wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz >/dev/null 2>&1 \
 	&& tar xf AdGuardHome_linux_amd64.tar.gz ./AdGuardHome/AdGuardHome -C /opt \
 	&& /bin/ash /opt/AdGuardHome \
