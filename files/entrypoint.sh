@@ -7,7 +7,7 @@ if [ $status -ne 0 ]; then
   exit $status
 fi
 
-/opt/AdGuardHome/AdGuardHome -c /opt/adguardhome/conf/AdGuardHome.yaml -w /opt/adguardhome/work --no-check-update
+/opt/adguardhome/AdGuardHome -c /opt/adguardhome/conf/AdGuardHome.yaml -w /opt/adguardhome/work --no-check-update
 status=$?
 if [ $status -ne 0 ]; then
   echo "Failed to start AdGuardHome: $status"
