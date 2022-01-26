@@ -1,7 +1,8 @@
-FROM alpine:3.13.5
- 
+FROM alpine:3.15
+
 RUN apk add --no-cache \
-	unbound=1.13.0-r3
+        libcap \
+        unbound=1.13.2-r2
 
 WORKDIR /tmp
 
@@ -9,15 +10,15 @@ RUN wget https://www.internic.net/domain/named.root -qO- >> /etc/unbound/root.hi
 
 COPY files/ /opt/
 
-# AdGuardHome v0.105.2
+# AdGuardHome
 RUN wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz >/dev/null 2>&1 \
-	&& mkdir -p /opt/adguardhome/conf /opt/adguardhome/work \
-	&& tar xf AdGuardHome_linux_amd64.tar.gz ./AdGuardHome/AdGuardHome  --strip-components=2 -C /opt/adguardhome \
-	&& /bin/ash /opt/adguardhome \
-	&& chown -R nobody: /opt/adguardhome \
-	&& setcap 'CAP_NET_BIND_SERVICE=+eip CAP_NET_RAW=+eip' /opt/adguardhome/AdGuardHome \
-	&& chmod +x /opt/entrypoint.sh \
-	&& rm -rf /tmp/* /var/cache/apk/*
+        && mkdir -p /opt/adguardhome/conf /opt/adguardhome/work \
+        && tar xf AdGuardHome_linux_amd64.tar.gz ./AdGuardHome/AdGuardHome  --strip-components=2 -C /opt/adguardhome \
+        && /bin/ash /opt/adguardhome \
+        && chown -R nobody: /opt/adguardhome \
+        && setcap 'CAP_NET_BIND_SERVICE=+eip CAP_NET_RAW=+eip' /opt/adguardhome/AdGuardHome \
+        && chmod +x /opt/entrypoint.sh \
+        && rm -rf /tmp/* /var/cache/apk/*
 
 WORKDIR /opt/adguardhome/work
 
